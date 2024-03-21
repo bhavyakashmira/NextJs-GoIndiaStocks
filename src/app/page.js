@@ -12,6 +12,10 @@ export default function Home() {
     const [showSidenav, setShowSidenav] = useState(false);
     const [showMarket, setShowMarket] = useState();
     const objects = data.articles;
+    let height
+    if (typeof window !== "undefined") {
+         height = window.innerWidth;
+    }
 
     function truncateDescription(description, wordCount) {
         const words = description?.split(' ');
@@ -26,8 +30,8 @@ export default function Home() {
       <>
           <div>
               <div className="grid grid-cols-2">
-                  <button onClick={() => setShowMarket(true)} className={`${window.innerWidth > 768 ? "bg-white" : (!showMarket ? "bg-white" : "bg-red-900")}`} >Market Stories</button>
-                  <button onClick={() => setShowMarket(false)} className={` ${ window.innerWidth>768?"bg-white" : ( showMarket? "bg-white": "bg-red-900")}`} >Discussion Forum</button>
+                  <button onClick={() => setShowMarket(true)} className={`${height > 768 ? "bg-white" : (!showMarket ? "bg-white" : "bg-red-900")}`} >Market Stories</button>
+                  <button onClick={() => setShowMarket(false)} className={` ${ height>768?"bg-white" : ( showMarket? "bg-white": "bg-red-900")}`} >Discussion Forum</button>
               </div>
               <div className="grid grid-cols-8 md:grid-cols-12 bg-gray-800">
                   <div className={`  col-span-1 text-white md:${showSidenav ? 'col-span-2' : 'col-span-1'}`}>
@@ -57,7 +61,7 @@ export default function Home() {
                           </nav>
                       )}
                   </div>
-                  <div className={`mt-10  justify-center items-center gap-2 ${window.innerWidth > 768 ? "col-span-5" : (showMarket ? "col-span-5" : "hidden")} md:col-span-7 md:grid md:grid-cols-2 `}>
+                  <div className={`mt-10  justify-center items-center gap-2 ${height > 768 ? "col-span-5" : (showMarket ? "col-span-5" : "hidden")} md:col-span-7 md:grid md:grid-cols-2 `}>
                       {objects.slice(1, 11).map((item, index) => (
                           <div key={index} className="px-4 m-2 max-w-[600px] py-3 bg-white rounded-md shadow-md  flex-rows items-center space-x-4">
                               <img src={item.urlToImage} className="w-full h-48 object-cover rounded-md" alt="News" />
@@ -68,7 +72,7 @@ export default function Home() {
                           </div>
                       ))}
                   </div>
-                  <div className={`mt-10 flex-row justify-center p-3 ${window.innerWidth > 768 ? " block col-span-4 " : (showMarket ? "hidden" : "col-span-7")} `}>
+                  <div className={`mt-10 flex-row justify-center p-3 ${height > 768 ? " block col-span-4 " : (showMarket ? "hidden" : "col-span-7")} `}>
                       {objects.slice(1, 10).map((item, index) => (
                           <div key={index} className="max-w-md m-2 overflow-hidden bg-white rounded-lg shadow-lg ">
                               <div className=" flex gap-3 m-1 p-4 md:p-4">
